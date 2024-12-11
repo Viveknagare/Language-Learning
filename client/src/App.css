@@ -1,0 +1,137 @@
+/* Root Styling */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Animated Background */
+.App {
+  animation: gradientBackground 20s ease infinite;
+  background-size: 400% 400%;
+  background: linear-gradient(135deg, #ff9a9e 10%, #fad0c4 40%, #fad0c4 60%, #ff9a9e 90%);
+}
+
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Character Styling */
+.character1, .character2 {
+  position: relative;
+  display: inline-block;
+  margin: 20px;
+}
+
+/* Speech Bubble Styling */
+.speech-bubble {
+  position: absolute;
+  padding: 20px 30px;
+  max-width: 400px;
+  border-radius: 20px;
+  color: #1f1e1e;
+  font-size: 18px;
+  line-height: 1.5;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  animation: bubblePop 0.4s ease-out;
+}
+
+.speech-bubble.character1 {
+  background-color: #e0f7fa;
+  border: 2px solid #26a69a;
+  left: -50px; /* Adjust this value as needed to move it further to the left */
+  top: -130px;
+}
+
+.speech-bubble.character2 {
+  background-color: #ffe0b2;
+  border: 2px solid #fb8c00;
+  right: -50px; /* Optional: You can adjust this if Character2's bubble needs repositioning */
+  top: -100px;
+}
+
+@keyframes bubblePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.speech-bubble.fade-out {
+  animation: bubbleFadeOut 0.5s ease-out forwards;
+}
+
+@keyframes bubbleFadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+/* Bubble Arrow Styling */
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.character1 .speech-bubble::after {
+  border-width: 15px;
+  border-color: transparent transparent #e0f7fa transparent;
+  top: 100%;
+  left: 75px; /* Adjust this to reposition the arrow correctly after moving the bubble */
+}
+
+.character2 .speech-bubble::after {
+  border-width: 15px;
+  border-color: transparent transparent #ffe0b2 transparent;
+  top: 100%;
+  right: 25px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .speech-bubble {
+    max-width: 80%;
+    padding: 15px;
+  }
+}
+
+/* Bounce animation for speaking */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Apply the animation to Character1 when active */
+.character1.active {
+  animation: bounce 0.3s ease-in-out infinite;
+}
+
+/* Apply the animation to Character2 when active */
+.character2.active {
+  animation: bounce 0.3s ease-in-out infinite;
+}
